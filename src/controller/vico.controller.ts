@@ -7,7 +7,7 @@ import {
   Profile as ProfileModel,
   VicoMain as VicoMainModel,
   VicoArchive as VicoArchiveModel,
-} from '@prisma/client'
+} from '../generated/client'
 import { OptionService } from '../util/option.service'
 import { WebsocketsGateway } from '../gateway/websockets.gateway'
 import { intersects } from 'radash'

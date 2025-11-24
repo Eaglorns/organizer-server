@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { Cron } from '@nestjs/schedule'
 import { DateTime } from 'luxon'
-import { VicoMain as VicoMainModel } from '@prisma/client'
+import { VicoMain as VicoMainModel } from '../generated/client'
 import { VicoArchiveService } from '../db/vicoArchive.service'
 import { VicoMainService } from '../db/vicoMain.service'
 import { Logger } from 'winston'

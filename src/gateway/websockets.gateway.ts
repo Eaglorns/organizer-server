@@ -13,7 +13,7 @@ import {
   Profile as ProfileModel,
   Storage as StorageModel,
   VicoMain as VicoMainModel,
-} from '@prisma/client'
+} from '../generated/client'
 import { OptionService } from '../util/option.service'
 
 import { intersects } from 'radash'
@@ -81,9 +81,9 @@ export class WebsocketsGateway
       optionTypeVico: this.options.optionTypeVico,
       optionDepartament: this.options.optionDepartament,
       techWork:
-        techWork != null ?
+        techWork == null ? false : (
           (techWork.data as unknown as TechWorkData).value
-        : false,
+        ),
     })
     client.emit('vicoAll', {
       vicos: vicoMainAll,
