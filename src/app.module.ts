@@ -10,6 +10,7 @@ import { TaskModule } from './task/task.module'
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler'
 import { APP_GUARD } from '@nestjs/core'
 import { format } from 'logform'
+import { ConfigModule } from '@nestjs/config'
 
 class TimestampFirst {
   enabled: boolean
@@ -41,6 +42,7 @@ class TimestampFirst {
     UtilsModule,
     ScheduleModule.forRoot(),
     TaskModule,
+    ConfigModule.forRoot(),
     WinstonModule.forRoot({
       transports: [
         new winston.transports.File({

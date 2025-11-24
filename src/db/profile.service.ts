@@ -6,11 +6,10 @@ import { Profile, Prisma } from '../generated/client'
 export class ProfileService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async one(params: { where?: Prisma.ProfileWhereInput }): Promise<Profile> {
-    const { where } = params
-    return this.prisma.profile.findFirst({
-      where,
-    })
+  async one(
+    profileFindFirstArgs: Prisma.ProfileFindFirstArgs
+  ): Promise<Profile | null> {
+    return this.prisma.profile.findFirst(profileFindFirstArgs)
   }
 
   async all(): Promise<Profile[]> {

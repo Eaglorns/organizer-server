@@ -31,7 +31,9 @@ export class AdminController {
     }
     try {
       const profile = await this.profileService.one({
-        where: { login: body.login },
+        where: {
+          login: body.login.toLocaleLowerCase(),
+        },
       })
 
       if (
