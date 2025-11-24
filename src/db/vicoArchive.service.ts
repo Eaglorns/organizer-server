@@ -6,13 +6,10 @@ import { VicoArchive, Prisma } from '../generated/client'
 export class VicoArchiveService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async one(params: {
-    where: Prisma.VicoArchiveWhereInput
-  }): Promise<VicoArchive | null> {
-    const { where } = params
-    return this.prisma.vicoArchive.findFirst({
-      where,
-    })
+  async one(
+    vicoArchiveFindFirstArgs: Prisma.VicoArchiveFindFirstArgs
+  ): Promise<VicoArchive | null> {
+    return this.prisma.vicoArchive.findFirst(vicoArchiveFindFirstArgs)
   }
 
   async all(): Promise<VicoArchive[]> {

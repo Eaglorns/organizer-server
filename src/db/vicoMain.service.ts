@@ -6,13 +6,10 @@ import { VicoMain, Prisma } from '../generated/client'
 export class VicoMainService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async one(params: {
-    where: Prisma.VicoMainWhereInput
-  }): Promise<VicoMain | null> {
-    const { where } = params
-    return this.prisma.vicoMain.findFirst({
-      where: where,
-    })
+  async one(
+    vicoMainFindFirstArgs: Prisma.VicoMainFindFirstArgs
+  ): Promise<VicoMain | null> {
+    return this.prisma.vicoMain.findFirst(vicoMainFindFirstArgs)
   }
 
   async all(params: { where: Prisma.VicoMainWhereInput }): Promise<VicoMain[]> {

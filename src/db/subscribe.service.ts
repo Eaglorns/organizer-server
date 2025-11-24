@@ -6,25 +6,23 @@ import { Subscribe, Prisma } from '../generated/client'
 export class SubscribeService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async Subscribe(
-    SubscribeWhereUniqueInput: Prisma.SubscribeWhereUniqueInput
+  async one(
+    subscribeFindFirstArgs: Prisma.SubscribeFindFirstArgs
   ): Promise<Subscribe | null> {
-    return this.prisma.subscribe.findUnique({
-      where: SubscribeWhereUniqueInput,
-    })
+    return this.prisma.subscribe.findFirst(subscribeFindFirstArgs)
   }
 
-  async Subscribes(): Promise<Subscribe[]> {
+  async all(): Promise<Subscribe[]> {
     return this.prisma.subscribe.findMany()
   }
 
-  async createSubscribe(data: Prisma.SubscribeCreateInput): Promise<Subscribe> {
+  async create(data: Prisma.SubscribeCreateInput): Promise<Subscribe> {
     return this.prisma.subscribe.create({
       data,
     })
   }
 
-  async updateSubscribe(params: {
+  async update(params: {
     where: Prisma.SubscribeWhereUniqueInput
     data: Prisma.SubscribeUpdateInput
   }): Promise<Subscribe> {

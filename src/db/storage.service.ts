@@ -6,11 +6,10 @@ import { Storage, Prisma } from '../generated/client'
 export class StorageService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async one(params: { where?: Prisma.StorageWhereInput }): Promise<Storage> {
-    const { where } = params
-    return this.prisma.storage.findFirst({
-      where,
-    })
+  async one(
+    storageFindFirstArgs: Prisma.StorageFindFirstArgs
+  ): Promise<Storage | null> {
+    return this.prisma.storage.findFirst(storageFindFirstArgs)
   }
 
   async all(): Promise<Storage[]> {
