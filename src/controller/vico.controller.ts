@@ -10,7 +10,6 @@ import {
 } from '../generated/client'
 import { OptionService } from '../util/option.service'
 import { WebsocketsGateway } from '../gateway/websockets.gateway'
-import { intersects } from 'radash'
 import { DateTime } from 'luxon'
 import { VicoArchiveService } from '../db/vicoArchive.service'
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston'
@@ -37,10 +36,7 @@ export class VicoController {
     textBeforeStart: string
   ): { success: boolean; message: string } {
     let access = { success: true, message: '' }
-    if (
-      profile.role < 1 &&
-      !intersects(this.options.superAdministrator, [body.login])
-    ) {
+    if (profile.role < 1) {
       access = {
         success: false,
         message: textAdmin,
@@ -387,10 +383,7 @@ export class VicoController {
           login: body.login,
         },
       })
-      if (
-        profile.role < 1 &&
-        !intersects(this.options.superAdministrator, [body.login])
-      ) {
+      if (profile.role < 1) {
         response.send({
           success: false,
           message: 'У вас нет прав на перенос записи ВКС в архив',
@@ -446,10 +439,7 @@ export class VicoController {
         },
       })
 
-      if (
-        profile.role < 1 &&
-        !intersects(this.options.superAdministrator, [body.login])
-      ) {
+      if (profile.role < 1) {
         response.send({
           success: false,
           message: 'У вас нет прав на удаление записи ВКС',

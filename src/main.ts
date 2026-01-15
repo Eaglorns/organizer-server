@@ -21,12 +21,12 @@ async function bootstrap() {
 
   app.enableCors()
 
-  const port = process.env.PORT || 3000
-  const host = process.env.HOST || '0.0.0.0'
+  const port = 3000
+  const host = '0.0.0.0'
 
   await app.init()
 
-  app.listen({ host: host, port: 3000 }, (err) => {
+  app.listen({ host: host, port: port }, (err) => {
     if (err) {
       Logger.error('Error starting the application', err)
       process.exit(1)
