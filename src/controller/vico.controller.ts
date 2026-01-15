@@ -71,7 +71,6 @@ export class VicoController {
     const body = request.body as {
       id: number
       login: string
-      computer: string
     }
     try {
       const vico = await this.vicoMainService.one({
@@ -86,7 +85,6 @@ export class VicoController {
         type: 'vico-one',
         ip: ip,
         login: body.login,
-        computer: body.computer,
       })
       response.send({
         success: false,
@@ -112,7 +110,6 @@ export class VicoController {
         type: 'vico-all',
         ip: ip,
         login: body.login,
-        computer: body.computer,
       })
       response.send({
         success: false,
@@ -131,7 +128,6 @@ export class VicoController {
     const body = request.body as {
       vico: VicoMainModel
       login: string
-      computer: string
     }
     try {
       const profile: ProfileModel = await this.profileService.one({
@@ -144,9 +140,7 @@ export class VicoController {
         'Запись ВКС не может быть создана в прошедших днях',
         'Начало ВКС не может быть позднее окончания'
       )
-      if (!access.success) {
-        response.send({ success: false, message: access.message })
-      } else {
+      if (access.success) {
         let typeVico = {}
         if (body.vico.typeVico === 'Допрос') {
           typeVico = body.vico.typeVico
@@ -223,12 +217,13 @@ export class VicoController {
             type: 'vico-create',
             ip: ip,
             login: body.login,
-            computer: body.computer,
             vico: vicoNew,
           })
           this.socket.server.emit('vicoCreate', vicoNew)
           response.send({ success: true })
         }
+      } else {
+        response.send({ success: false, message: access.message })
       }
     } catch (err) {
       console.log(err)
@@ -236,7 +231,6 @@ export class VicoController {
         type: 'vico-create',
         ip: ip,
         login: body.login,
-        computer: body.computer,
       })
       response.send({
         success: false,
@@ -256,7 +250,6 @@ export class VicoController {
       id: number
       vico: VicoMainModel
       login: string
-      computer: string
     }
     try {
       const profile: ProfileModel = await this.profileService.one({
@@ -269,9 +262,7 @@ export class VicoController {
         'Запись ВКС не может быть изменена на прошедший день',
         'Начало ВКС не может быть позднее окончания'
       )
-      if (!access.success) {
-        response.send({ success: false, message: access.message })
-      } else {
+      if (access.success) {
         let typeVico = {}
         if (body.vico.typeVico === 'Допрос') {
           typeVico = body.vico.typeVico
@@ -355,13 +346,14 @@ export class VicoController {
             type: 'vico-update',
             ip: ip,
             login: body.login,
-            computer: body.computer,
             source: source,
             result: result,
           })
           this.socket.server.emit('vicoUpdate', { vico: result })
           response.send({ success: true })
         }
+      } else {
+        response.send({ success: false, message: access.message })
       }
     } catch (err) {
       console.log(err)
@@ -369,7 +361,6 @@ export class VicoController {
         type: 'vico-update',
         ip: ip,
         login: body.login,
-        computer: body.computer,
       })
       response.send({
         success: false,
@@ -389,7 +380,6 @@ export class VicoController {
       id: number
       vico: VicoMainModel
       login: string
-      computer: string
     }
     try {
       const profile: ProfileModel = await this.profileService.one({
@@ -420,7 +410,6 @@ export class VicoController {
           type: 'vico-archive',
           ip: ip,
           login: body.login,
-          computer: body.computer,
           archive: result,
         })
         response.send({ success: true })
@@ -431,7 +420,6 @@ export class VicoController {
         type: 'vico-moved',
         ip: ip,
         login: body.login,
-        computer: body.computer,
       })
       response.send({
         success: false,
@@ -450,7 +438,6 @@ export class VicoController {
     const body = request.body as {
       id: number
       login: string
-      computer: string
     }
     try {
       const profile: ProfileModel = await this.profileService.one({
@@ -476,7 +463,6 @@ export class VicoController {
           type: 'vico-delete',
           ip: ip,
           login: body.login,
-          computer: body.computer,
           vico,
         })
         response.send({ success: true })
@@ -487,7 +473,6 @@ export class VicoController {
         type: 'vico-delete',
         ip: ip,
         login: body.login,
-        computer: body.computer,
       })
       response.send({
         success: false,

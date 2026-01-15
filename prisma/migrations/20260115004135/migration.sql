@@ -47,6 +47,7 @@ CREATE TABLE "VicoArchive" (
 CREATE TABLE "Profile" (
     "id" SERIAL NOT NULL,
     "login" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "role" SMALLINT NOT NULL DEFAULT 0,
 
     CONSTRAINT "Profile_pkey" PRIMARY KEY ("id")

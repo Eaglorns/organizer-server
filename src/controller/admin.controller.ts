@@ -27,7 +27,6 @@ export class AdminController {
     const body = request.body as {
       type: number
       login: string
-      computer: string
     }
     try {
       const profile = await this.profileService.one({
@@ -92,7 +91,6 @@ export class AdminController {
         type: 'admin-techWork',
         ip: ip,
         login: body.login,
-        computer: body.computer,
       })
       response.send({
         success: false,
