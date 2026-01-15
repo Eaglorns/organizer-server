@@ -39,7 +39,7 @@ export class VicoController {
     let access = { success: true, message: '' }
     if (
       profile.role < 1 &&
-      !intersects(this.options.superAdministrator, [body.login.toLowerCase()])
+      !intersects(this.options.superAdministrator, [body.login])
     ) {
       access = {
         success: false,
@@ -131,7 +131,7 @@ export class VicoController {
     }
     try {
       const profile: ProfileModel = await this.profileService.one({
-        where: { login: body.login.toLowerCase() },
+        where: { login: body.login },
       })
       const access = this.isAccess(
         body,
@@ -253,7 +253,7 @@ export class VicoController {
     }
     try {
       const profile: ProfileModel = await this.profileService.one({
-        where: { login: body.login.toLowerCase() },
+        where: { login: body.login },
       })
       const access = this.isAccess(
         body,
@@ -389,7 +389,7 @@ export class VicoController {
       })
       if (
         profile.role < 1 &&
-        !intersects(this.options.superAdministrator, [body.login.toLowerCase()])
+        !intersects(this.options.superAdministrator, [body.login])
       ) {
         response.send({
           success: false,
@@ -448,7 +448,7 @@ export class VicoController {
 
       if (
         profile.role < 1 &&
-        !intersects(this.options.superAdministrator, [body.login.toLowerCase()])
+        !intersects(this.options.superAdministrator, [body.login])
       ) {
         response.send({
           success: false,
