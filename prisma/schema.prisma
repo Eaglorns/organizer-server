@@ -50,6 +50,7 @@ model VicoArchive {
 model Profile {
   id        Int        @id @default(autoincrement())
   login     String
+  password  String
   role      Int        @default(0) @db.SmallInt // 0-guest,1-user,2-moderator,3-admin,4-root
   subscribe Subscribe?
 }
